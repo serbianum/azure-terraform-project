@@ -1,14 +1,17 @@
+#Creating Azure resource group
 resource "azurerm_resource_group" "terraform" {
   name     = "TFProject-resources"
   location = "West Europe"
 }
 
+#Creating security group and addid to existing terraform resource group
 resource "azurerm_network_security_group" "terraform" {
   name                = "terraform-security-group"
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
 }
 
+#Creating virtual netwok to the current resource group
 resource "azurerm_virtual_network" "terraform" {
   name                = "tfp-network"
   location            = azurerm_resource_group.terraform.location
@@ -19,11 +22,13 @@ resource "azurerm_virtual_network" "terraform" {
   subnet {
     name           = "subnet1"
     address_prefix = "10.0.1.0/24"
+    security_group = azurerm_network_security_group.terraform.id
   }
 
   sbunet {
     name           = "subnet2"
     address_prefix = "10.0.2.0/24"
+    security_group = azurerm_network_security_group.terraform.id
   }
 
   subnet {
@@ -33,6 +38,6 @@ resource "azurerm_virtual_network" "terraform" {
   }
 
   tags = {
-    environment = "Production"
+    environment = "VPC"
   }
 }

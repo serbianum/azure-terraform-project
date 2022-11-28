@@ -11,6 +11,34 @@ resource "azurerm_network_security_group" "terraform" {
   resource_group_name = azurerm_resource_group.terraform.name
 }
 
+resource "azurerm_network_security_rule" "terraform" {
+  name                        = "HTTP"
+  priority                    = 100
+  direction                   = "Outbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = [80, 443]
+  destination_port_range      = [80, 443]
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.terrafrom.name
+  network_security_group_name = azurerm_network_security_group.terraform.name
+}
+
+resource "azurerm_network_security_rule" "terraform" {
+  name                        = "HTTP"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = [80, 443]
+  destination_port_range      = [80, 443]
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.terrafrom.name
+  network_security_group_name = azurerm_network_security_group.terraform.name
+}
+
 #Creating virtual netwok to the current resource group
 resource "azurerm_virtual_network" "terraform" {
   name                = "tfp-network"
@@ -38,7 +66,7 @@ resource "azurerm_virtual_network" "terraform" {
   }
 
   tags = {
-    environment = "VPC"
+    environment = "VNET"
   }
 }
 

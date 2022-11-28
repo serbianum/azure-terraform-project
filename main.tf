@@ -18,16 +18,17 @@ resource "azurerm_network_security_rule" "terraform" {
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  destination_port_range      = "80"
+  destination_port_range      = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.terraform.name
   network_security_group_name = azurerm_network_security_group.terraform.name
 }
 
+
 #Creating virtual netwok to the current resource group
 resource "azurerm_virtual_network" "terraform" {
-  name                = "tfp-network"
+  name                = "Word-press-vnet"
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
   address_space       = ["10.0.0.0/16"]

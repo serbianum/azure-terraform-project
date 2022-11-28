@@ -17,25 +17,11 @@ resource "azurerm_network_security_rule" "terraform" {
   direction                   = "Outbound"
   access                      = "Allow"
   protocol                    = "Tcp"
-  source_port_range           = [80, 443]
-  destination_port_range      = [80, 443]
+  source_port_range           = "*"
+  destination_port_range      = "80"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.terrafrom.name
-  network_security_group_name = azurerm_network_security_group.terraform.name
-}
-
-resource "azurerm_network_security_rule" "terraform" {
-  name                        = "HTTP"
-  priority                    = 100
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = [80, 443]
-  destination_port_range      = [80, 443]
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.terrafrom.name
+  resource_group_name         = azurerm_resource_group.terraform.name
   network_security_group_name = azurerm_network_security_group.terraform.name
 }
 
@@ -53,7 +39,7 @@ resource "azurerm_virtual_network" "terraform" {
     security_group = azurerm_network_security_group.terraform.id
   }
 
-  sbunet {
+  subnet {
     name           = "subnet2"
     address_prefix = "10.0.2.0/24"
     security_group = azurerm_network_security_group.terraform.id

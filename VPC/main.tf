@@ -11,69 +11,20 @@ resource "azurerm_network_security_group" "terraform" {
   resource_group_name = azurerm_resource_group.terraform.name
 }
 
-module "network-security-group" {
-  source                = "Azure/network-security-group/azurerm"
-  resource_group_name   = azurerm_resource_group.terraform.name
-  location              = var.region
-  security_group_name   = var.sec_group
-  source_address_prefix = [var.subnet1,var.subnet2, var.subnet3]
-  predefined_rules = [
-    {
-      name     = "SSH"
-      priority = "500"
-    },
-    {
-      name              = "LDAP"
-      source_port_range = "1024-1026"
-    }
-  ]
-
-  custom_rules = [
-    {
-      name                   = "http"
-      priority               = 201
-      direction              = "Inbound"
-      access                 = "Allow"
-      protocol               = "tcp"
-      source_port_range      = "*"
-      destination_port_range = "80"
-      source_address_prefix  = [var.subnet1,var.subnet2, var.subnet3]
-      description            = "Open port 80 for HTTP traffic"
-    },
-    {
-      name                    = "https"
-      priority                = 200
-      direction               = "Inbound"
-      access                  = "Allow"
-      protocol                = "tcp"
-      source_port_range       = "*"
-      destination_port_range  = "443"
-      source_address_prefixes = [var.subnet1,var.subnet2, var.subnet3]
-      description             = "Open port 443 for HTTPS traffic"
-    },
-  ]
-
-  tags = {
-    environment = "dev"
-  }
-
-  depends_on = [azurerm_resource_group.terraform]
+#Open port 80 not sure this is how we supposed to do it
+resource "azurerm_network_security_rule" "terraform" {
+  name                        = "HTTP"
+  priority                    = 100
+  direction                   = "INBOUND"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.terraform.name
+  network_security_group_name = azurerm_network_security_group.terraform.name
 }
-
-#THIS IS COMMENTED BECAUSE IT ALLOWS ONLY ONE RULE AT A TIME, EXAMPLE ABOVE LOOKS LIKE A MORE SUITABLE METHOD
-# resource "azurerm_network_security_rule" "terraform" {
-#   name                        = "HTTP"
-#   priority                    = 100
-#   direction                   = "INBOUND"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_range      = "*"
-#   source_address_prefix       = "*"
-#   destination_address_prefix  = "*"
-#   resource_group_name         = azurerm_resource_group.terraform.name
-#   network_security_group_name = azurerm_network_security_group.terraform.name
-# }
 
 
 #Creating virtual netwok to the current resource group

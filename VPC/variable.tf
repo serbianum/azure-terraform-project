@@ -5,8 +5,9 @@ variable "region" {
 }
 
 variable "sec_group"{
-    type       = string
-    description 
+  type        = string
+  description = "Enter Security Group name"
+  default     = ""
 }
 
 variable "vnet_name" {

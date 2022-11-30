@@ -9,8 +9,26 @@ resource "azurerm_network_security_group" "terraform" {
   name                = var.sec_group
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
+}
 
-   custom_rules = [
+module "network-security-group" {
+  source                = "Azure/network-security-group/azurerm"
+  resource_group_name   = azurerm_resource_group.terraform.name
+  location              = var.region
+  security_group_name   = var.sec_group
+  source_address_prefix = [var.subnet1,var.subnet2, var.subnet3]
+  predefined_rules = [
+    {
+      name     = "SSH"
+      priority = "500"
+    },
+    {
+      name              = "LDAP"
+      source_port_range = "1024-1026"
+    }
+  ]
+
+  custom_rules = [
     {
       name                   = "http"
       priority               = 201
@@ -19,8 +37,8 @@ resource "azurerm_network_security_group" "terraform" {
       protocol               = "tcp"
       source_port_range      = "*"
       destination_port_range = "80"
-      source_address_prefix  = var.vnet_address_space
-      description            = "Open porst 80 for HTTP traffic"
+      source_address_prefix  = [var.subnet1,var.subnet2, var.subnet3]
+      description            = "Open port 80 for HTTP traffic"
     },
     {
       name                    = "https"
@@ -30,8 +48,8 @@ resource "azurerm_network_security_group" "terraform" {
       protocol                = "tcp"
       source_port_range       = "*"
       destination_port_range  = "443"
-      source_address_prefixes = var.vnet_address_space
-      description             = "Open port 443 for HTTPS Traffic"
+      source_address_prefixes = [var.subnet1,var.subnet2, var.subnet3]
+      description             = "Open port 443 for HTTPS traffic"
     },
   ]
 

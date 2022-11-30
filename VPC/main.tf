@@ -1,6 +1,6 @@
 #Creating Azure resource group
 resource "azurerm_resource_group" "terraform" {
-  name     = "TFProject-resources"
+  name     = "tf_project"
   location = "West Europe"
 }
 

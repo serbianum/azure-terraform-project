@@ -31,7 +31,7 @@ variable "res_group" {
 variable "dns_servers" {
   type        = list
   description = "Enter DNS server"
-  default     = [""]
+  default     = ["",""]
 }
 
 variable "subnet1" {

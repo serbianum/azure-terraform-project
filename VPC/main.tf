@@ -15,7 +15,7 @@ resource "azurerm_network_security_group" "terraform" {
 resource "azurerm_network_security_rule" "terraform" {
   name                        = "HTTP"
   priority                    = 100
-  direction                   = "Inbound"
+  direction                   = "Outbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"

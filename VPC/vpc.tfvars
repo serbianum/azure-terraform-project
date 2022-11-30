@@ -1,6 +1,6 @@
 region             = "East US"
 vnet_name          = "terraform_project_vpc"
-vnet_address_space = "10.0.0.0/16"
+vnet_address_space = ["10.0.0.0/16"]
 res_group          = "terraform_project"
 sec_group          = "Tproject_scurity_group"
 dns_servers        = ["10.0.0.4", "10.0.0.5"]

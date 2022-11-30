@@ -19,13 +19,13 @@ variable "vnet_name" {
 variable "vnet_address_space" {
   type        = list
   description = "Enter vnet address space"
-  default     = ""
+  default     = [""]
 }
 
 variable "res_group" {
   type        = string
   description = "Enter resource group name"
-  default     = [""]  
+  default     = ""  
 }
 
 variable "dns_servers" {

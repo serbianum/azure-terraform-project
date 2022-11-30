@@ -1,12 +1,12 @@
 #Creating Azure resource group
 resource "azurerm_resource_group" "terraform" {
-  name     = "tf_project"
-  location = "West Europe"
+  name     = var.res_group
+  location = var.region
 }
 
 #Creating security group and addid to existing terraform resource group
 resource "azurerm_network_security_group" "terraform" {
-  name                = "terraform-security-group"
+  name                = var.sec_group
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
 }
@@ -28,27 +28,27 @@ resource "azurerm_network_security_rule" "terraform" {
 
 #Creating virtual netwok to the current resource group
 resource "azurerm_virtual_network" "terraform" {
-  name                = "Word-press-vnet"
+  name                = var.vnet_name
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
-  address_space       = ["10.0.0.0/16"]
-  dns_servers         = ["10.0.0.4", "10.0.0.5"]
+  address_space       = var.vnet_address_space
+  dns_servers         = var.dns_servers
 
   subnet {
     name           = "subnet1"
-    address_prefix = "10.0.1.0/24"
+    address_prefix = var.subnet1
     security_group = azurerm_network_security_group.terraform.id
   }
 
   subnet {
     name           = "subnet2"
-    address_prefix = "10.0.2.0/24"
+    address_prefix = var.subnet2
     security_group = azurerm_network_security_group.terraform.id
   }
 
   subnet {
     name           = "subnet3"
-    address_prefix = "10.0.3.0/24"
+    address_prefix = var.subnet3
     security_group = azurerm_network_security_group.terraform.id
   }
 

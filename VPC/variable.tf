@@ -1,7 +1,7 @@
 variable "region" {
   type        = string
   description = "Enter region"
-  default     = "us-east-1"
+  default     = "East US"
 }
 
 variable "sec_group"{
@@ -9,26 +9,41 @@ variable "sec_group"{
     description 
 }
 
-variable "vpc_name" {
+variable "vnet_name" {
   type        = string
   description = "Enter VPC Name"
   default     = ""
 }
 
-variable "vpc_cidr" {
+variable "vnet_address_space" {
   type        = string
-  description = "Enter VPC CIDR Range"
+  description = "Enter vnet address space"
   default     = ""
 }
 
-variable "priv_subnets" {
-  type        = list(any)
-  description = "Enter Private Subnets"
-  default     = []
+variable "res_group" {
+  type        = string
+  description = "Enter resource group name"
+  default     = ""  
 }
 
-variable "pub_subnets" {
-  type        = list(any)
-  description = "Enter Private Subnets"
-  default     = []
+variable "dns_servers" {
+  type        = list
+  description = "Enter DNS server"
+  default     = [""]
+}
+
+variable "subnet1" {
+  type        = string
+  description = "Enter subnet 1"
+}
+
+variable "subnet2" {
+  type        = string
+  description = "Enter subnet 2"
+}
+
+variable "subnet3" {
+  type        = string
+  description = "Enter subnet 3"
 }

@@ -77,7 +77,7 @@ resource "azurerm_virtual_network" "terraform" {
     ip_configuration {
       name      = "terraform"
       primary   = true
-      subnet_id = azurerm_subnet.terraform.id
+      subnet_id = azurerm_subnet.terraform[each.key].id
     }
   }
 }

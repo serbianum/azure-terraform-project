@@ -34,7 +34,7 @@ resource "azurerm_virtual_network" "terraform" {
   resource_group_name = azurerm_resource_group.terraform.name
   address_space       = var.vnet_address_space
   dns_servers         = var.dns_servers
-
+}
  resource "azurerm_subnet" "terraform" {
    for_each             = var.subnets
    resource_group_name  = azurerm_resource_group.terraform.name

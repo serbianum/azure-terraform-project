@@ -45,12 +45,7 @@ resource "azurerm_virtual_network" "terraform" {
    depends_on           = [azurerm_virtual_network.terraform]
    
  }
- 
- locals {
-  first_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+wWK73dCr+jgQOAxNsHAnNNNMEMWOHYEccp6wJm2gotpr9katuF/ZAdou5AaW1C61slRkHRkpRRX9FA9CYBiitZgvCCz+3nWNN7l/Up54Zps/pHWGZLHNJZRYyAB6j5yVLMVHIHriY49d/GZTZVNB8GoJv9Gakwc/fuEZYYl4YDFiGMBP///TzlI4jhiJzjKnEvqPFki5p2ZRJqcbCiF4pJrxUQR/RXqVFQdbRLZgYfJ8xGB878RENq3yQ39d8dVOkq4edbkzwcUmwwwkYVPIoDGsYLaRHnG+To7FvMeyO7xDVQkMKzopTQV8AuKpyvpqu0a9pWOMaiCyDytO7GGN you@me.com"
-}
-
- 
+  
  resource "azurerm_linux_virtual_machine_scale_set" "terraform" {
   name                = "terraform-vmss"
   resource_group_name = azurerm_resource_group.terraform.name
@@ -61,7 +56,7 @@ resource "azurerm_virtual_network" "terraform" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = local.first_public_key
+    public_key = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDU7DWDdaSk8VxH29TJhmF1j2gd+h0USTboymQdRBUsc7xVgjZumWznghwxs3AmajcsZuigCP0Jkh+qJ545hWBtv2Y7uhynJ/mbpmNjyP/gXKPYW8igkyrMOkOsyBQBfqr2di5IOTojc0xHlLcUcalosc4RwL4K8wEQvcd+aD1Stqa0uG6JV/vAYDGb8XY6BS10MrRb+uPmZDM5J3AwiYkDsiI1qbFHfuMibUST4zAkCU5hy+/2ZHN4mPXREKBL4U7rER+iN4hG9RTaIrjJYkm3meByZepFaZEEayx39A831EPpKMep8amWOWWjAZO7ipieDu+5tOecy2+d6XgKCjvH9qY/WtphWTW1sf3cIidA69/I0JqG/XemvpZBY+liicSuVy6mvWUlY2HbHt+7mKxzHf3IzYNNdtvkfFvj6bNxHvH/d75HDw+awiNSRgKvti5vYp30OdkKy4LX/zbuAXqivSvIE4jkdL4xWwAL8yjzfGCwBD4OtI8w8TV4VwLshFc= mihai@cc-6faa9033-6857b67664-z87lb
   }
 
   source_image_reference {

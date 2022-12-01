@@ -39,7 +39,6 @@ resource "azurerm_virtual_network" "terraform" {
    for_each             = var.subnets
    resource_group_name  = azurerm_resource_group.terraform.name
    virtual_network_name = azurerm_virtual_network.terraform.name
-   security_group        = azurerm_network_security_group.id
    name                 = each.value["name"]
    address_prefixes     = each.value["address_prefixes"]
    depends_on           = [azurerm_virtual_network.terraform]

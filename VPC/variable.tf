@@ -34,17 +34,16 @@ variable "dns_servers" {
   default     = ["",""]
 }
 
-variable "subnet1" {
-  type        = string
-  description = "Enter subnet 1"
-}
-
-variable "subnet2" {
-  type        = string
-  description = "Enter subnet 2"
-}
-
-variable "subnet3" {
-  type        = string
-  description = "Enter subnet 3"
+variable "subnets" {
+	type = map(any)
+	default = {
+		name		     ="subnet_1"
+		address_prefixes =["10.0.11.0/24"]
+		
+		name		     ="subnet_2"
+		address_prefixes =["10.0.12.0/24"]
+		
+		name		     ="subnet_3"
+		address_prefixes =["10.0.13.0/24"]
+	}
 }

@@ -83,8 +83,5 @@ resource "azurerm_virtual_network" "terraform" {
   }
 }
  
-  tags = {
-    environment = "dev"
-  }
-}
+
 

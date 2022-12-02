@@ -54,6 +54,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
 
 
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
+  for_each            = var.subnets
   name                = "vmss"
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
@@ -87,7 +88,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
       
       name      = "terraform"
       primary   = true
-      subnet_id = azurerm_subnet.subnet.id
+      subnet_id = azurerm_subnet.subnet[each.name].id
     }
   }
 }

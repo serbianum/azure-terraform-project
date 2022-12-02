@@ -58,8 +58,9 @@ variable "public_key" {
   default     = ""  
 }
 
-variable "vm_name" {
-  type        = list
-  description = "Enter vm name"
-  default     = ["1","2",3]
-}
+#not needed 
+# variable "vm_name" {
+#   type        = list
+#   description = "Enter vm name"
+#   default     = ["1","2",3]
+# }

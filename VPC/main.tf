@@ -52,10 +52,10 @@ resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
 }
 
 
-
+#Creating Linux VM Scale set
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
-  for_each            = var.subnets
-  name                = "vmss"
+  for_each            = var.subnets #this will loop through all declared subnets
+  name                = "vmss"           
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
   sku                 = "Standard_F2"
@@ -88,7 +88,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
       
       name      = "terraform"
       primary   = true
-      subnet_id = azurerm_subnet.subnet[each.key].id
+      subnet_id = azurerm_subnet.subnet[each.key].id #here we pull the subnet id through that "for_each"
     }
   }
 }

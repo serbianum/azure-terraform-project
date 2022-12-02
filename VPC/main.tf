@@ -54,6 +54,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+
 resource "random_string" "vmssname" {
   length  = 6
   special = false
@@ -64,11 +65,11 @@ resource "random_string" "vmssname" {
 #Creating Linux VM Scale set
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   for_each            = var.subnets #this will loop through all declared subnets
-  name                = "vmss-"$(random_string.vmssname.result)""         
+  name                = "vmss-"$(random_string.vmssname.result)""    
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
   sku                 = "Standard_F2"
-  instances           = 3
+  instances           = 1
   admin_username      = "adminuser"
 
   admin_ssh_key {

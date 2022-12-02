@@ -54,8 +54,8 @@ resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
 
 
 resource "azurerm_linux_virtual_machine_scale_set" "terraform" {
-  for_each            = var.vm_name
-  name                = each.vm_name
+  #for_each            = var.vm_name
+  name                = "vmss"
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
   sku                 = "Standard_F2"
@@ -86,7 +86,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "terraform" {
     ip_configuration {
       name      = "terraform"
       primary   = true
-      subnet_id = azurerm_subnet.subnet[each.key].id
+      subnet_id = azurerm_subnet.subnet.id
     }
   }
 }

@@ -57,3 +57,9 @@ variable "public_key" {
   description = "Enter resource group name"
   default     = ""  
 }
+
+variable "vm_name" {
+  type        = list
+  description = "Enter vm name"
+  default     = ["1","2",3]
+}

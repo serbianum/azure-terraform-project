@@ -35,6 +35,8 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = var.vnet_address_space
   dns_servers         = var.dns_servers
 }
+
+#Creating the subnets
  resource "azurerm_subnet" "subnet" {
    for_each             = var.subnets
    resource_group_name  = azurerm_resource_group.terraform.name
@@ -44,18 +46,25 @@ resource "azurerm_virtual_network" "vnet" {
    depends_on           = [azurerm_virtual_network.vnet]
    
  }
-  
+
+#Assigning a security group to all existing subnets
 resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
   for_each                  = var.subnets
   subnet_id                 = azurerm_subnet.subnet[each.key].id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
+resource "random_string" "vmssname" {
+  length  = 6
+  special = false
+  upper   = false
+  number  = false
+}
 
 #Creating Linux VM Scale set
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   for_each            = var.subnets #this will loop through all declared subnets
-  name                = "vmss"           
+  name                = "vmss-"$(random_string.vmssname.result)""         
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
   sku                 = "Standard_F2"

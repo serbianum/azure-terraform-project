@@ -79,10 +79,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   }
 
   network_interface {
-    name    = "terraform"
+    name    = azurerm_virtual_network.vnet.name 
     primary = true
+    
 
-    ip_configuration {
+   dynamic "ip_configuration" {
+      
       name      = "terraform"
       primary   = true
       subnet_id = azurerm_subnet.subnet["name"].id

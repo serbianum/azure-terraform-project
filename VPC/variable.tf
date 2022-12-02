@@ -51,3 +51,9 @@ variable "subnets" {
 		}
 	}
 }
+
+variable "public_key" {
+  type        = string
+  description = "Enter resource group name"
+  default     = ""  
+}

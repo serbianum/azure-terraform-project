@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "terraform" {
 }
 
 #Creating security group and addid to existing terraform resource group
-resource "azurerm_network_security_group" "terraform" {
+resource "azurerm_network_security_group" "nsg" {
   name                = var.sec_group
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
@@ -23,29 +23,35 @@ resource "azurerm_network_security_rule" "terraform" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.terraform.name
-  network_security_group_name = azurerm_network_security_group.terraform.name
+  network_security_group_name = azurerm_network_security_group.nsg.name
 }
 
 
 #Creating virtual netwok to the current resource group
-resource "azurerm_virtual_network" "terraform" {
+resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
   location            = azurerm_resource_group.terraform.location
   resource_group_name = azurerm_resource_group.terraform.name
   address_space       = var.vnet_address_space
   dns_servers         = var.dns_servers
 }
- resource "azurerm_subnet" "terraform" {
+ resource "azurerm_subnet" "subnet" {
    for_each             = var.subnets
    resource_group_name  = azurerm_resource_group.terraform.name
-   virtual_network_name = azurerm_virtual_network.terraform.name
+   virtual_network_name = azurerm_virtual_network.vnet.name
    name                 = each.value["name"]
    address_prefixes     = each.value["address_prefixes"]
-   depends_on           = [azurerm_virtual_network.terraform]
+   depends_on           = [azurerm_virtual_network.vnet]
    
  }
   
- resource "azurerm_linux_virtual_machine_scale_set" "terraform" {
+resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
+  for_each                  = var.subnets
+  subnet_id                 = azurerm_subnet.subnet[each.key].id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
+
+resource "azurerm_linux_virtual_machine_scale_set" "terraform" {
   name                = "terraform-vmss"
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
@@ -55,7 +61,7 @@ resource "azurerm_virtual_network" "terraform" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDU7DWDdaSk8VxH29TJhmF1j2gd+h0USTboymQdRBUsc7xVgjZumWznghwxs3AmajcsZuigCP0Jkh+qJ545hWBtv2Y7uhynJ/mbpmNjyP/gXKPYW8igkyrMOkOsyBQBfqr2di5IOTojc0xHlLcUcalosc4RwL4K8wEQvcd+aD1Stqa0uG6JV/vAYDGb8XY6BS10MrRb+uPmZDM5J3AwiYkDsiI1qbFHfuMibUST4zAkCU5hy+/2ZHN4mPXREKBL4U7rER+iN4hG9RTaIrjJYkm3meByZepFaZEEayx39A831EPpKMep8amWOWWjAZO7ipieDu+5tOecy2+d6XgKCjvH9qY/WtphWTW1sf3cIidA69/I0JqG/XemvpZBY+liicSuVy6mvWUlY2HbHt+7mKxzHf3IzYNNdtvkfFvj6bNxHvH/d75HDw+awiNSRgKvti5vYp30OdkKy4LX/zbuAXqivSvIE4jkdL4xWwAL8yjzfGCwBD4OtI8w8TV4VwLshFc= mihai@cc-6faa9033-6857b67664-z87lb"
+    public_key = var.public_key
   }
 
   source_image_reference {
@@ -82,5 +88,3 @@ resource "azurerm_virtual_network" "terraform" {
   }
 }
  
-
-

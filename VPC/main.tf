@@ -35,18 +35,18 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = var.vnet_address_space
   dns_servers         = var.dns_servers
 }
- resource "azurerm_subnet" "terraform" {
+ resource "azurerm_subnet" "subnet" {
    for_each             = var.subnets
    resource_group_name  = azurerm_resource_group.terraform.name
    virtual_network_name = azurerm_virtual_network.vnet.name
    name                 = each.value["name"]
    address_prefixes     = each.value["address_prefixes"]
-   depends_on           = [azurerm_virtual_network.terraform]
+   depends_on           = [azurerm_virtual_network.vnet]
    
  }
   
 resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
   for_each                  = var.subnets
-  subnet_id                 = azurerm_subnet.snet[each.key].id
+  subnet_id                 = azurerm_subnet.subnet[each.key].id
   network_security_group_id = azurerm_network_security_group.nsg.id
 } 

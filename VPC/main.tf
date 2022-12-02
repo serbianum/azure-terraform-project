@@ -88,7 +88,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
       
       name      = "terraform"
       primary   = true
-      subnet_id = azurerm_subnet.subnet[each.name].id
+      subnet_id = azurerm_subnet.subnet[each.key].id
     }
   }
 }

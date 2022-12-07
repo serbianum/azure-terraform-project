@@ -142,7 +142,7 @@ resource "azurerm_lb_rule" "lbnatrule" {
   protocol                       = "Tcp"
   frontend_port                  = 80
   backend_port                   = 80
-  backend_address_pool_ids        = azurerm_lb_backend_address_pool.bpepool.id
+  backend_address_pool_ids        = [azurerm_lb_backend_address_pool.bpepool.id]
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = azurerm_lb_probe.wordpress.id
 }

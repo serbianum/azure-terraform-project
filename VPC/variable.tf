@@ -34,23 +34,35 @@ variable "dns_servers" {
   default     = ["",""]
 }
 
-variable "subnets" {
-	type = map(any)
-	default = {
-		subnet_1 = {
-		  name		     ="subnet_1"
-		  address_prefixes =["10.0.11.0/24"]
-		}
-		subnet_2 = {
-		  name		     ="subnet_2"
-		  address_prefixes =["10.0.12.0/24"]
-		}
-		subnet_3 = {
-		  name		     ="subnet_3"
-		  address_prefixes =["10.0.13.0/24"]
-		}
-	}
+variable "subnet_name" {
+  type        = string
+  description = "Enter subnet name"
+  default     = "subnet1"   
 }
+
+variable "subnet_ip_range" {
+  type        = list
+  description = "Enter vnet address space"
+  default     = ["10.0.1.0/24"]
+}
+
+# variable "subnets" {
+# 	type = map(any)
+# 	default = {
+# 		subnet_1 = {
+# 		  name		     ="subnet_1"
+# 		  address_prefixes =["10.0.11.0/24"]
+# 		}
+# 		subnet_2 = {
+# 		  name		     ="subnet_2"
+# 		  address_prefixes =["10.0.12.0/24"]
+# 		}
+# 		subnet_3 = {
+# 		  name		     ="subnet_3"
+# 		  address_prefixes =["10.0.13.0/24"]
+# 		}
+# 	}
+# }
 
 variable "public_key" {
   type        = string

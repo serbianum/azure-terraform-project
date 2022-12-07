@@ -111,9 +111,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    publisher = "OpenLogic"
+    offer     = "CentOS"
+    sku       = "7_9-gen2"
     version   = "latest"
   }
 

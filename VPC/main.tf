@@ -79,6 +79,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
   sku                 = "Standard_F2"
   instances           = 1
   admin_username      = "adminuser"
+  custom_data = filebase64("customdata.tpl")
 
   admin_ssh_key {
     username   = "adminuser"
@@ -146,8 +147,4 @@ resource "azurerm_lb_rule" "lbnatrule" {
   backend_address_pool_ids        = [azurerm_lb_backend_address_pool.bpepool.id]
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = azurerm_lb_probe.wordpress.id
-}
-
-output "application_public_address" {
-  value = azurerm_public_ip.public_ip.ip
 }

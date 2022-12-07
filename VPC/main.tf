@@ -137,12 +137,12 @@ resource "azurerm_lb_probe" "wordpress" {
 
 resource "azurerm_lb_rule" "lbnatrule" {
   #resource_group_name            = azurerm_resource_group.terraform.name
-  loadbalancer_ids                = azurerm_lb.wp_lb.id
+  loadbalancer_id                = azurerm_lb.wp_lb.id
   name                           = "http"
   protocol                       = "Tcp"
   frontend_port                  = 80
   backend_port                   = 80
-  backend_address_pool_id        = azurerm_lb_backend_address_pool.bpepool.id
+  backend_address_pool_ids        = azurerm_lb_backend_address_pool.bpepool.id
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = azurerm_lb_probe.wordpress.id
 }

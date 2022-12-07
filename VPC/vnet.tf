@@ -25,7 +25,3 @@ resource "azurerm_virtual_network" "vnet" {
   allocation_method   = "Static"
   domain_name_label   = random_string.random_s.result
 }
-
-resource "azurerm_network_interface" "nic {
- 
-}

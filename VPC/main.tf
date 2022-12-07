@@ -149,5 +149,5 @@ resource "azurerm_lb_rule" "lbnatrule" {
 }
 
 output "application_public_address" {
-  value = azurerm_public_ip.public_ip.random_string
+  value = azurerm_public_ip.public_ip.ip
 }

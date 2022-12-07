@@ -136,8 +136,8 @@ resource "azurerm_lb_probe" "wordpress" {
 }
 
 resource "azurerm_lb_rule" "lbnatrule" {
-  resource_group_name            = azurerm_resource_group.terraform.name
-  loadbalancer_id                = azurerm_lb.wp_lb.id
+  #resource_group_name            = azurerm_resource_group.terraform.name
+  loadbalancer_ids                = azurerm_lb.wp_lb.id
   name                           = "http"
   protocol                       = "Tcp"
   frontend_port                  = 80

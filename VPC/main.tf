@@ -107,6 +107,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
       name      = "terraform"
       primary   = true
       subnet_id = azurerm_subnet.subnet[each.key].id #here we pull the subnet id through that "for_each"
+      load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.bpepool.id] 
     }
   }
 }
@@ -145,4 +146,8 @@ resource "azurerm_lb_rule" "lbnatrule" {
   backend_address_pool_ids        = [azurerm_lb_backend_address_pool.bpepool.id]
   frontend_ip_configuration_name = "PublicIPAddress"
   probe_id                       = azurerm_lb_probe.wordpress.id
+}
+
+output "application_public_address" {
+  value = azurerm_public_ip.wordpress.random_string
 }

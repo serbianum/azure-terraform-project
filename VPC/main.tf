@@ -23,8 +23,8 @@ resource "azurerm_network_security_group" "nsg" {
   }
 
   security_rule {
-    name                        = "HTTP"
-    priority                    = 100
+    name                        = "SSH"
+    priority                    = 101
     direction                   = "Inbound"
     access                      = "Allow"
     protocol                    = "Tcp"

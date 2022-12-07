@@ -50,7 +50,7 @@ resource "azurerm_virtual_network" "vnet" {
 resource "azurerm_public_ip" "public_ip" {
   name                = "wordpress-public-ip"
   location            = var.region
-  resource_group_name = azurerm_resource_group.wordpress.name
+  resource_group_name = azurerm_resource_group.terraform.name
   allocation_method   = "Static"
   domain_name_label   = random_string.random_string.result
 }

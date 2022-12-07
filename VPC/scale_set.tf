@@ -28,12 +28,11 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
 
   network_interface {
     name                = "wordpress-nic"
-    location            = azurerm_resource_group.terraform.location
-    resource_group_name = azurerm_resource_group.terraform.name
+    primary             = true
 
     ip_configuration {
       
-      name                                   = "terraform"
+      name                                   = "ip-config"
       primary                                = true
       subnet_id                              = azurerm_subnet.subnet[each.key].id #here we pull the subnet id through that "for_each"
       load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.bpepool.id] 

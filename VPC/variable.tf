@@ -70,6 +70,12 @@ variable "database_admin_password" {
   default     = ""  
 }
 
+variable "db_name" {
+  type        = string
+  description = "Enter database name"
+  default     = ""  
+}
+
 #not needed 
 # variable "vm_name" {
 #   type        = list

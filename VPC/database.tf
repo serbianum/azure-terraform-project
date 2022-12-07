@@ -22,7 +22,7 @@ resource "azurerm_mysql_server" "my_sql" {
 
 # Create MySql DataBase
 resource "azurerm_mysql_database" "my_db" {
-  name                = var.dbname
+  name                = var.db_name
   resource_group_name = azurerm_resource_group.terraform.name
   server_name         = azurerm_mysql_server.my_sql.name
   charset             = "utf8"

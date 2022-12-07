@@ -12,7 +12,7 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 #Open port 80 not sure this is how we supposed to do it
-resource "azurerm_network_security_rule" "terraform" {
+resource "azurerm_network_security_rule" "sec_rule" {
   name                        = "HTTP"
   priority                    = 100
   direction                   = "Outbound"
@@ -38,26 +38,23 @@ resource "azurerm_virtual_network" "vnet" {
 
 #Creating the subnets
  resource "azurerm_subnet" "subnet" {
-   for_each             = var.subnets
    resource_group_name  = azurerm_resource_group.terraform.name
    virtual_network_name = azurerm_virtual_network.vnet.name
-   name                 = each.value["name"]
-   address_prefixes     = each.value["address_prefixes"]
+   name                 = var.subnet_name
+   address_prefixes     = var.subnet_ip
    depends_on           = [azurerm_virtual_network.vnet]
    
  }
 
 #Assigning a security group to all existing subnets
 resource "azurerm_subnet_network_security_group_association" "nsg-assoc" {
-  for_each                  = var.subnets
-  subnet_id                 = azurerm_subnet.subnet[each.key].id
+  subnet_id                 = azurerm_subnet.subnet.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 
 #Creating Linux VM Scale set
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
-  for_each            = var.subnets #this will loop through all declared subnets
   name                = "vmss"
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location

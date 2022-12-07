@@ -58,6 +58,18 @@ variable "public_key" {
   default     = ""  
 }
 
+variable "database_admin_login" {
+  type        = string
+  description = "Enter database admin login"
+  default     = ""  
+}
+
+variable "database_admin_password" {
+  type        = string
+  description = "Enter database admin password"
+  default     = ""  
+}
+
 #not needed 
 # variable "vm_name" {
 #   type        = list

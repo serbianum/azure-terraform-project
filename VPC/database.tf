@@ -1,5 +1,5 @@
 # Create MySQL Server
-resource "azurerm_mysql_server" "my_sql" {
+resource "azurerm_mysql_server" "db_server" {
   resource_group_name = azurerm_resource_group.terraform.name
   name                ="team2sql-whynot2"                                         #"team2sql-${(random_string.fqdn.result)}"
   location            = azurerm_resource_group.terraform.location
@@ -24,7 +24,7 @@ resource "azurerm_mysql_server" "my_sql" {
 resource "azurerm_mysql_database" "my_db" {
   name                = var.db_name
   resource_group_name = azurerm_resource_group.terraform.name
-  server_name         = azurerm_mysql_server.my_sql.name
+  server_name         = azurerm_mysql_server.db_server.name
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 }
@@ -33,12 +33,12 @@ resource "azurerm_mysql_database" "my_db" {
 resource "azurerm_mysql_firewall_rule" "firewall_rule" {
   name                = "wordpress-mysql-firewall-rule"
   resource_group_name = azurerm_resource_group.terraform.name
-  server_name         = azurerm_mysql_server.my_sql.name
+  server_name         = azurerm_mysql_server.db_server.name
   start_ip_address    = azurerm_public_ip.public_ip.ip_address
   end_ip_address      = azurerm_public_ip.public_ip.ip_address
 }
 
 data "azurerm_mysql_server" "wordpress" {
-  name                = azurerm_mysql_server.my_sql.name
+  name                = azurerm_mysql_server.db_server.name
   resource_group_name = azurerm_resource_group.terraform.name
 }

@@ -22,7 +22,7 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.region
   resource_group_name = azurerm_resource_group.terraform.name
   allocation_method   = "Static"
-  domain_name_label   = random_string.fqdn.result
+  domain_name_label   = random_string.random_s.result
 }
 
 resource "azurerm_network_interface" "ss_vm_nic" {

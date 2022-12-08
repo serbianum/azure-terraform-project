@@ -46,11 +46,6 @@ variable "subnet_ip_range" {
   default     = ["10.0.1.0/24"]
 }
 
-variable "public_key" {
-  type        = string
-  description = "Enter resource group name"
-  default     = ""  
-}
 
 variable "application_port" {
   description = "The port that you want to expose to the external load balancer"
@@ -87,8 +82,7 @@ variable "admin_password" {
 variable "public_key" {
   type        = string
   description = "Enter resource group name"
-  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwWXuPlRsEvNzOEEYiUoWl8EQ+TnRxbgU4jSZ2IqKSTf1bfw93+x82tL6M+l7jb2PHWEQyD/UNyq2zAzPZf06eFmtr6NNsr8ljdPEKjKDtvz8azhOtyqX7X60sUg9k4KAh52zDkjzBw+8KBxxdPPweGH2556KVedxbKpmAeXwqX/xMjken8xB1IMNpSDVtVz02NhOQ4qUNRdRJpRpZ2GT/jbf9SRP7HkLNhD4JkjGuuepLcwIsyVedPBgBntQB8JrfCC7E0US37QoOvnCJO2vvFAOrhHhl9/JTrZ6MzFR004SUGgslaKIt4Gz0Jz7ntzDig6t7jaFYDCpl1aVgT6wl+CNrNz5HS3HbCxeyCwlixgSsu26x1U4zN/Z2Vkn0grV7ROCdwRdWR72td0VT2npwYcJB3m/OxGuDf8goPbBleFNlbAg3eMalzZAeDeIVJa39gmLpKxvJz/pH/ykKpagAEjLNrtjycz19dw2egJPPfNNZ39VhpNoOv5BgHaF4/5k= serbianum@Mihais-MacBook-Pro.local"  
-}
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/KF4iJs58HNgdYbxMneuVI3+e51VkJNQrHplchh5+bLyYEkJ1IOyiymreO5gdFyZ9dgBhUuEy3ZcpIQ9oDL3qx66JOojUnOD3cfofGHEpFC/pyB+764OvVgOYUORE9J6RMMTN37FFbM5zhe91Ijmsa7tYfncgT8Xxp1G/d+Ve+TFTlxm6pHlwdY0IsFVkP3hxLf0dic2Ywd/VtuFZe2FSC/6nfykqQSHeFhzKGX+Zd+FBxG+ioysSw0qEm44ntGiig0Yz9qPlcLN57jxXF69Kt73YOJLnwm3kvvno30Ro+ayY0PT2mKT10SRXQFtv9ih8Cuei+8fYfMnidspH2VwKFp7mBnX+CbnBP/RFZa++ehginz8gACAO0m9qYJJI0IERrwepoO30t6Mcd0R+ILdDE170opxVE6sIxgetLdrW+wsxql6lB+Fp2BGXwkC1KBYAnWx+onQN+nfaKA4YPaiRIbW0iA9bCyFziF2jUeX1/yByfsPDPbmoJiYkJgKtAIc= mihai@cc-6b420173-cf6fbb8cb-5bgh2"
 
 #not needed 
 # variable "vm_name" {

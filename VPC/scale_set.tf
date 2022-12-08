@@ -1,7 +1,8 @@
 #Creating Linux VM Scale set
 resource "azurerm_linux_virtual_machine_scale_set" "vmss" { 
-  depends_on = [azurerm_network_interface.ss_vm_nic]
+  depends_on=[azurerm_network_interface.ss_vm_nic]
   name                = "vmss"
+  network_interface_ids = [azurerm_network_interface.ss_vm_nic.id]
   resource_group_name = azurerm_resource_group.terraform.name
   location            = azurerm_resource_group.terraform.location
   sku                 = "Standard_D2S_v3"

@@ -16,7 +16,6 @@ resource "azurerm_lb_backend_address_pool" "bpepool" {
 }
 
 resource "azurerm_lb_probe" "vmss" {
-  resource_group_name = azurerm_resource_group.terraform.name
   loadbalancer_id     = azurerm_lb.vmss.id
   name                = "ssh-running-probe"
   port                = var.application_port

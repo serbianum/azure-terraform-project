@@ -31,6 +31,4 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss" {
       primary                                = true
     }
   }
-
-  tags = var.tags
 }

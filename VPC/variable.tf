@@ -46,6 +46,26 @@ variable "subnet_ip_range" {
   default     = ["10.0.1.0/24"]
 }
 
+variable "public_key" {
+  type        = string
+  description = "Enter resource group name"
+  default     = ""  
+}
+
+variable "application_port" {
+  description = "The port that you want to expose to the external load balancer"
+  default     = 80
+}
+
+variable "admin_username" {
+  description = "User name to use as the admin account on the VMs that will be part of the VM Scale Set"
+  default     = "serbianum"
+}
+
+variable "admin_password" {
+  description = "Default password for admin account"
+  default     = "Avoidpass95"
+}
 # variable "subnets" {
 # 	type = map(any)
 # 	default = {

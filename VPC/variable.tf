@@ -67,7 +67,7 @@ variable "subnet_ip_range" {
 variable "public_key" {
   type        = string
   description = "Enter resource group name"
-  default     = ""  
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwWXuPlRsEvNzOEEYiUoWl8EQ+TnRxbgU4jSZ2IqKSTf1bfw93+x82tL6M+l7jb2PHWEQyD/UNyq2zAzPZf06eFmtr6NNsr8ljdPEKjKDtvz8azhOtyqX7X60sUg9k4KAh52zDkjzBw+8KBxxdPPweGH2556KVedxbKpmAeXwqX/xMjken8xB1IMNpSDVtVz02NhOQ4qUNRdRJpRpZ2GT/jbf9SRP7HkLNhD4JkjGuuepLcwIsyVedPBgBntQB8JrfCC7E0US37QoOvnCJO2vvFAOrhHhl9/JTrZ6MzFR004SUGgslaKIt4Gz0Jz7ntzDig6t7jaFYDCpl1aVgT6wl+CNrNz5HS3HbCxeyCwlixgSsu26x1U4zN/Z2Vkn0grV7ROCdwRdWR72td0VT2npwYcJB3m/OxGuDf8goPbBleFNlbAg3eMalzZAeDeIVJa39gmLpKxvJz/pH/ykKpagAEjLNrtjycz19dw2egJPPfNNZ39VhpNoOv5BgHaF4/5k= serbianum@Mihais-MacBook-Pro.local"  
 }
 
 #not needed 

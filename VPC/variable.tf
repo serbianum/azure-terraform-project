@@ -84,6 +84,7 @@ variable "public_key" {
   description = "Enter resource group name"
   default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/KF4iJs58HNgdYbxMneuVI3+e51VkJNQrHplchh5+bLyYEkJ1IOyiymreO5gdFyZ9dgBhUuEy3ZcpIQ9oDL3qx66JOojUnOD3cfofGHEpFC/pyB+764OvVgOYUORE9J6RMMTN37FFbM5zhe91Ijmsa7tYfncgT8Xxp1G/d+Ve+TFTlxm6pHlwdY0IsFVkP3hxLf0dic2Ywd/VtuFZe2FSC/6nfykqQSHeFhzKGX+Zd+FBxG+ioysSw0qEm44ntGiig0Yz9qPlcLN57jxXF69Kt73YOJLnwm3kvvno30Ro+ayY0PT2mKT10SRXQFtv9ih8Cuei+8fYfMnidspH2VwKFp7mBnX+CbnBP/RFZa++ehginz8gACAO0m9qYJJI0IERrwepoO30t6Mcd0R+ILdDE170opxVE6sIxgetLdrW+wsxql6lB+Fp2BGXwkC1KBYAnWx+onQN+nfaKA4YPaiRIbW0iA9bCyFziF2jUeX1/yByfsPDPbmoJiYkJgKtAIc= mihai@cc-6b420173-cf6fbb8cb-5bgh2"
 
+}
 #not needed 
 # variable "vm_name" {
 #   type        = list

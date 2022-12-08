@@ -17,10 +17,24 @@ resource "azurerm_virtual_network" "vnet" {
    
  }
 
- resource "azurerm_public_ip" "wordpress" {
+ resource "azurerm_public_ip" "wp_public_ip" {
   name                = "wordpress-public-ip"
   location            = var.region
   resource_group_name = azurerm_resource_group.terraform.name
   allocation_method   = "Static"
   domain_name_label   = random_string.fqdn.result
+}
+
+resource "azurerm_network_interface" "ss_vm_nic" {
+  depends_on=[azurerm_resource_group.terraform]
+  name                = "SS Network Interface"
+  location            = azurerm_resource_group.terraform.location
+  resource_group_name = azurerm_resource_group.terraform.name
+  
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.wp_public_ip.id
+  }
 }

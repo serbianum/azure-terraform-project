@@ -25,16 +25,16 @@ resource "azurerm_virtual_network" "vnet" {
   domain_name_label   = random_string.random_s.result
 }
 
-resource "azurerm_network_interface" "ss_vm_nic" {
-  depends_on=[azurerm_resource_group.terraform]
-  name                = "SS Network Interface"
-  location            = azurerm_resource_group.terraform.location
-  resource_group_name = azurerm_resource_group.terraform.name
+# resource "azurerm_network_interface" "ss_vm_nic" {
+#   depends_on=[azurerm_resource_group.terraform]
+#   name                = "SS Network Interface"
+#   location            = azurerm_resource_group.terraform.location
+#   resource_group_name = azurerm_resource_group.terraform.name
   
-  ip_configuration {
-    name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.wp_public_ip.id
-  }
-}
+#   ip_configuration {
+#     name                          = "internal"
+#     subnet_id                     = azurerm_subnet.subnet.id
+#     private_ip_address_allocation = "Dynamic"
+#     public_ip_address_id          = azurerm_public_ip.wp_public_ip.id
+#   }
+# }

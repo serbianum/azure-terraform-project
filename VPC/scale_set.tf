@@ -145,7 +145,7 @@ resource "azurerm_virtual_machine_scale_set" "example" {
     ip_configuration {
       name                                   = "TestIPConfiguration"
       primary                                = true
-      subnet_id                              = azurerm_subnet.example.id
+      subnet_id                              = azurerm_subnet.subnet.id
       load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.bpepool.id]
       load_balancer_inbound_nat_rules_ids    = [azurerm_lb_nat_pool.lbnatpool.id]
     }
